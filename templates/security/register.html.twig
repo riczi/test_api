@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register!{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+    {{ form_row(form.termsAccepted) }}
+
+    <div class="row">
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary">Register!</button>
+        </div>
+        <div class="col-sm-6 text-right">
+            <a href="{{ path('app_login') }}" class="btn btn-secondary">Login</a>
+        </div>
+    </div>
+            {{ form_end(form) }}
+
+{% endblock %}

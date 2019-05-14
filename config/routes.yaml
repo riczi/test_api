@@ -1,0 +1,18 @@
+homepage:
+  path:     /
+  controller: App\Controller\IndexController::index
+  methods:    [GET]
+
+user_registration:
+  path:     /register
+  controller: App\Controller\SecurityController::register
+  methods:    [GET, POST]
+
+app_login:
+  path:     /login
+  controller: App\Controller\SecurityController::login
+  methods:    [GET, POST]
+
+app_logout:
+  path: /logout
+  methods: GET

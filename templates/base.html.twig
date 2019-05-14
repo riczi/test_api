@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+            <style>
+                .container {
+                    padding: 30px 0;
+                }
+            </style>
+        {% endblock %}
+    </head>
+    <body>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div class="container">
+            <h1>Jolanta Buczak API v. 1.0</h1>
+        </div>
+        <div class="container">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-sm-4 text-left">
+
+                        <p> Donec sed pretium dui. Praesent in magna sit amet tellus bibendum tristique. Etiam aliquet justo enim, vel maximus felis viverra a. Etiam et dui quis libero gravida sagittis at et arcu. Aenean lobortis quam accumsan odio aliquet feugiat. Ut vulputate egestas placerat. Vivamus et tortor bibendum, venenatis sem vitae, rutrum leo. Sed interdum nibh dignissim gravida pellentesque. Proin ullamcorper lobortis enim at volutpat. Suspendisse viverra purus nibh, sed elementum erat ornare sed. Maecenas suscipit ligula ut tortor facilisis interdum. Pellentesque vel felis vel lacus convallis molestie. Mauris et justo a sem aliquam pulvinar. Donec ut ullamcorper odio. Nullam metus risus, congue in eros et, volutpat dapibus metus.</p>
+
+                    </div>
+                    <div class="col-sm-6 offset-sm-2 text-left">
+
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% block javascripts %}
+            <!-- jQuery library -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+            <!-- Popper JS -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+            <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        {% endblock %}
+    </body>
+</html>

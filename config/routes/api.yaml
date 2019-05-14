@@ -1,0 +1,29 @@
+user_get:
+    path:     /api/user/{id}
+    controller: App\Controller\Api\UserController::get
+    methods:    [GET]
+
+user_cget:
+    path:     /api/user
+    controller: App\Controller\Api\UserController::cget
+    methods:    [GET]
+
+user_post:
+    path:     /api/user
+    controller: App\Controller\Api\UserController::post
+    methods:    [POST]
+
+user_patch:
+    path:     /api/user/{id}
+    controller: App\Controller\Api\UserController::patch
+    methods:    [PATCH]
+
+user_put:
+    path:     /api/user/{id}
+    controller: App\Controller\Api\UserController::put
+    methods:    [PUT]
+
+user_delete:
+    path:     /api/user/{id}
+    controller: App\Controller\Api\UserController::delete
+    methods:    [DELETE]
