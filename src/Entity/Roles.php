@@ -7,20 +7,20 @@ class Roles
 {
     public const ROLE_USER = 'ROLE_USER';
     public const ROLE_ADMIN = 'ROLE_ADMIN';
-    public const ROLE_SUPERADMIN = 'ROLE_SUPERADMIN';
+    public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
 
     public static function availableRoles(): array
     {
         return [
             self::ROLE_USER,
             self::ROLE_ADMIN,
-            self::ROLE_SUPERADMIN
+            self::ROLE_SUPER_ADMIN
         ];
     }
 
     public static function getDefaultRoles(): array
     {
-        return [self::ROLE_USER];
+        return [self::ROLE_SUPER_ADMIN];
     }
 
     public static function isValid(string $value): bool

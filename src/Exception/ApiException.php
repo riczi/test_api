@@ -16,4 +16,9 @@ class ApiException extends \Exception
     {
         return new static("INCORRECT_REQUEST", Response::HTTP_BAD_REQUEST);
     }
+
+    public static function accessDenied(): ApiException
+    {
+        return new static("ACCESS_DENIED", Response::HTTP_FORBIDDEN);
+    }
 }

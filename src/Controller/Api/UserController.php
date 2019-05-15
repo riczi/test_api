@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Validator\UserValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,6 +43,8 @@ class UserController extends AbstractController
     {
         $user = $this->userRepository->findUserById(Uuid::fromString($id));
 
+        $this->checkAccessToOwnerOrAdmin($user->getId());
+
         $this->entityManager->remove($user);
         $this->entityManager->flush();
 
@@ -55,6 +58,8 @@ class UserController extends AbstractController
     {
         $user = $this->userRepository->findUserById(Uuid::fromString($id));
 
+        $this->checkAccessToOwnerOrAdmin($user->getId());
+
         return new JsonResponse(
             [
                 'item' => $user
@@ -65,6 +70,8 @@ class UserController extends AbstractController
 
     public function cget(): JsonResponse
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $users = $this->userRepository->findAll();
 
         return new JsonResponse(
@@ -120,6 +127,8 @@ class UserController extends AbstractController
 
         $user = $this->userRepository->findUserById(Uuid::fromString($id));
 
+        $this->checkAccessToOwnerOrAdmin($user->getId());
+
         if ($user->getUsername() != $username && $this->validator->isUsernameUnique($username)) {
             $user->setUserName($username);
         }
@@ -149,6 +158,8 @@ class UserController extends AbstractController
 
         $user = $this->userRepository->findUserById(Uuid::fromString($id));
 
+        $this->checkAccessToOwnerOrAdmin($user->getId());
+
         if (isset($data['username']) && $user->getUsername() != $data['username'] && $this->validator->isUsernameUnique($data['username'])) {
             $user->setUserName($data['username']);
         }
@@ -170,5 +181,14 @@ class UserController extends AbstractController
             ],
             JsonResponse::HTTP_OK
         );
+    }
+
+    private function checkAccessToOwnerOrAdmin(UuidInterface $id): bool
+    {
+        if($id != $this->getUser()->getId() && !$this->isGranted('ROLE_ADMIN')) {
+            throw ApiException::accessDenied();
+        }
+
+        return true;
     }
 }
